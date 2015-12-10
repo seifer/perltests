@@ -3,14 +3,17 @@
 use strict;
 use warnings;
 
-# External modules
-use Benchmark;
+use Bencher;
 
-Benchmark::cmpthese(10000000, {
-    ';' => sub {
-        my $x = 1; my $y = 2;
-    },
-    ',' => sub {
-        my $x = 1, my $y = 2;
-    },
-});
+test ';' => sub {
+    my $x = 1; my $y = 2;
+};
+
+test ',' => sub {
+    my $x = 1, my $y = 2;
+};
+
+=result
+               ;         12233386 ops/s (1.00)
+               ,         12233386 ops/s (1.00)
+=cut

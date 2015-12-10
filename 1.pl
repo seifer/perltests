@@ -3,14 +3,19 @@
 use strict;
 use warnings;
 
-# External modules
-use Benchmark;
+use Bencher;
 
-Benchmark::cmpthese(100000000, {
-    do => sub {
-        do { ; }
-    },
-    block => sub {
-        { ; }
-    },
-});
+my $str = 'favasdvoinasdf';
+
+test re => sub {
+    $str =~ /^(yes|no)$/i ? 1 : 0;
+};
+
+test if => sub {
+    $str eq 'yes' || $str eq 'no' ? 1 : 0;
+};
+
+=result
+              if         27373352 ops/s (3.23)
+              re          8469267 ops/s (1.00)
+=cut
